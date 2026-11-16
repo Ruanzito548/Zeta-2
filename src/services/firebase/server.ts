@@ -3,7 +3,7 @@
  * Initialize Firebase Admin SDK for server-side operations
  */
 
-import { initializeApp, type ServiceAccount } from 'firebase-admin/app';
+import { initializeApp, type ServiceAccount, cert } from 'firebase-admin/app';
 import { getAuth as getAdminAuth, type Auth as AdminAuth } from 'firebase-admin/auth';
 import {
   getFirestore as getAdminFirestore,
@@ -23,12 +23,19 @@ function initializeFirebaseAdmin() {
     throw new Error('FIREBASE_ADMIN_SDK_KEY environment variable is not set');
   }
 
-  const serviceAccount = JSON.parse(
-    process.env.FIREBASE_ADMIN_SDK_KEY,
-  ) as ServiceAccount;
+  let serviceAccount: ServiceAccount;
+
+  try {
+    serviceAccount = JSON.parse(process.env.FIREBASE_ADMIN_SDK_KEY) as ServiceAccount;
+  } catch {
+    throw new Error(
+      'Invalid JSON in FIREBASE_ADMIN_SDK_KEY environment variable. ' +
+      'Make sure it contains a valid Firebase service account JSON.',
+    );
+  }
 
   adminApp = initializeApp({
-    credential: require('firebase-admin/app').cert(serviceAccount),
+    credential: cert(serviceAccount),
     projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   });
 
