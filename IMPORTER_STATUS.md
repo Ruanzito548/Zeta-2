@@ -1,5 +1,9 @@
 # Database Importer - Current Status Report
 
+> **Warning:** The importer is incomplete and has not been validated with real
+> data or Firestore. It is not production-ready. The analysis endpoint returns
+> HTTP 503 until administrative authentication and authorization are implemented.
+
 ## ✅ Validation Results
 
 ### TypeScript
@@ -116,7 +120,7 @@ src/modules/database-importer/
 ### 6. API Routes (`app/api/admin/import/`)
 - **Status**: 🟡 Partial (only /analyze endpoint)
 - **Implemented**:
-  - `POST /api/admin/import/analyze` - Analyzes data source
+  - `POST /api/admin/import/analyze` - Temporarily disabled (HTTP 503)
 - **TODO**:
   - `POST /api/admin/import/start` - Initiates import
   - `POST /api/admin/import/pause` - Pauses import

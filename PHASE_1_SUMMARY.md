@@ -1,5 +1,10 @@
 # Database Importer - Phase 1 Summary & Next Steps
 
+> **Warning:** This historical summary overstates the importer's readiness.
+> The importer is incomplete and untested against real data or Firestore. The
+> analysis endpoint is disabled until admin authentication and authorization
+> are implemented.
+
 ## 🎯 What Was Completed
 
 The World of Warcraft Forever Database Importer has been successfully implemented with a solid, type-safe foundation. The core import engine is production-ready and can begin handling real data once remaining components are added.
